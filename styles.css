@@ -130,7 +130,7 @@ section h2 {
   background-color: #16a085;
 }
 
-/* Flex Container for Projects Cards */
+/* Flex Container for Cards */
 .flex-container {
   display: flex;
   flex-wrap: wrap;
@@ -138,32 +138,18 @@ section h2 {
   margin-top: 20px;
 }
 
+/* Card Styles */
 .card {
   background-color: #c4dbf1;
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
-  width: calc(33.333% - 20px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
-}
-
-.card img {
-  width: 100%;
-  height: 300px;
-  display: block;
-}
-
-.card-content {
-  padding: 15px;
-}
-
-.card-content h3 {
-  margin-bottom: 10px;
 }
 
 /* Skills Section - Grid Layout */
@@ -259,22 +245,91 @@ footer {
     height: auto;
     text-align: center;
   }
-
+  
   main {
     margin-left: 0;
     padding: 20px;
   }
-
-  .card, .skill-card {
+  
+  .flip-card, .skill-card, .card {
     width: calc(50% - 20px);
   }
 }
 
 @media (max-width: 480px) {
-  .card, .skill-card {
+  .flip-card, .skill-card, .card {
     width: 100%;
   }
+  
   .skills-grid {
     flex-direction: column;
   }
+}
+
+/* Flip Card Specific Styles */
+.flip-card {
+  background-color: transparent;
+  width: calc(33.333% - 20px);
+  height: 350px; /* Set a fixed height for visibility */
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flip-card-front {
+  background-color: #c4dbf1;
+  display: flex;
+  flex-direction: column;
+}
+
+.flip-card-front img {
+  width: 100%;
+  height: 60%; /* Image takes 60% of the card's height */
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 10px;
+  height: 40%; /* The remaining 40% is for text content */
+  overflow: auto;
+}
+
+.flip-card-back {
+  background-color: #f9f9f9;
+  transform: rotateY(180deg);
+  padding: 15px;
+}
+
+.card-back-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.flip-card-back .btn {
+  margin-top: 15px;
 }
